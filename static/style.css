@@ -1,0 +1,3478 @@
+/* ================================================================
+   CURRA — GLOBAL STYLES
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   DESIGN TOKENS
+   ---------------------------------------------------------------- */
+
+:root {
+  /*
+     Light, airy main content area with a soft off-white/lavender
+     tint, paired with a permanently dark navy sidebar (its own
+     fixed tokens below, not part of the light/dark toggle) and a
+     single purple signature accent — matching the reference CRM
+     inbox: light workspace, dark nav rail, purple highlights.
+  */
+  --bg: #f7f7fb;
+  --bg-soft: #ffffff;
+
+  --panel: #ffffff;
+  --panel-2: #f1f1f7;
+  --panel-3: #e8e7f3;
+
+  --border: #ebeaf3;
+  --border-light: #dcdae8;
+
+  --text: #2b2a38;
+  --text-strong: #14121f;
+  --muted: #8b8a99;
+  --muted-light: #6c6b7a;
+
+  /*
+     The permanently dark sidebar — always this color regardless of
+     the light/dark toggle, same as the reference's nav rail. Fully
+     neutral black/gray, no purple undertone.
+  */
+  --sidebar-bg: #171717;
+  --sidebar-panel: #1e1e1e;
+  --sidebar-panel-2: #272727;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-text: #d4d4d4;
+  --sidebar-text-strong: #ffffff;
+  --sidebar-muted: #8c8c8c;
+
+  /* The one signature color — a confident purple, used for the
+     logo, active states, the send button, and the progress bar. */
+  --accent: #7c6ff5;
+  --accent-hover: #6a5cf0;
+  --accent-2: #a78bfa;
+
+  --locked: #c7c6d4;
+  --danger: #e04a63;
+  --warning: #c98a1f;
+
+  /* Second hue paired with --accent for gradient headline text and
+     the ambient background glow. */
+  --glow-a: rgba(124, 111, 245, 0.16);
+  --glow-b: rgba(167, 139, 250, 0.12);
+
+  /* Two gradient text variants: one fixed for the always-dark
+     sidebar wordmark, one theme-dependent for the main content
+     empty-state headline. Main starts dark-text-based since the
+     light theme is the default (dark theme override below swaps
+     this to a light-text base). */
+  --gradient-text-sidebar:
+    linear-gradient(
+      100deg,
+      #ffffff 0%,
+      #d6cffb 45%,
+      #a78bfa 100%
+    );
+  --gradient-text-main:
+    linear-gradient(
+      100deg,
+      #14121f 0%,
+      #6a5cf0 45%,
+      #7c6ff5 100%
+    );
+
+  --success-bg: rgba(124, 111, 245, 0.12);
+  --danger-bg: rgba(224, 74, 99, 0.1);
+  --warning-bg: rgba(201, 138, 31, 0.12);
+  --accent-bg: rgba(124, 111, 245, 0.1);
+
+  /*
+     User/assistant message bubble colors. Agent replies sit in a
+     neutral off-white card; the student's own messages sit in a
+     blue-tinted card — matching the reference chat bubble color.
+  */
+  --bubble-assistant-bg: #ffffff;
+  --bubble-assistant-border: #ecebf3;
+  --bubble-user-bg: #dbeafe;
+  --bubble-user-border: #bfdbfe;
+  --bubble-user-text: #1e3a5f;
+
+  --shadow-sm:
+    0 2px 8px rgba(20, 18, 31, 0.06);
+
+  --shadow:
+    0 8px 24px rgba(20, 18, 31, 0.08);
+
+  --shadow-lg:
+    0 16px 48px rgba(20, 18, 31, 0.14);
+
+  /* Rounder throughout — pill inputs, generously rounded cards. */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  --sidebar-width: 320px;
+  --topbar-height: 70px;
+  --content-max-width: 900px;
+  --message-max-width: 760px;
+
+  --font-sans:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  --font-mono:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
+
+  font-family: var(--font-sans);
+
+  color-scheme: light;
+}
+
+
+/* ================================================================
+   DARK THEME OVERRIDE
+   ================================================================ */
+
+/*
+   The light, purple-accented palette above is now the default,
+   matching the reference. This block is the dark-mode alternate —
+   script.js's applyTheme() sets data-theme="dark" on <html> to
+   activate it. The --sidebar-* tokens are intentionally NOT
+   redeclared here: the nav rail stays the same dark navy in both
+   themes, exactly like the reference always shows a dark sidebar
+   regardless of the main workspace being light.
+*/
+
+html[data-theme="dark"] {
+  /*
+     Neutral, near-black surfaces — matching Claude's dark theme
+     rather than tinting every panel purple. The signature accent
+     (buttons, focus rings, progress bar) stays purple; it's just
+     the backgrounds that go fully neutral now.
+  */
+  --bg: #1a1a1a;
+  --bg-soft: #131313;
+
+  --panel: #212121;
+  --panel-2: #262626;
+  --panel-3: #313131;
+
+  --border: #3a3a3a;
+  --border-light: #4a4a4a;
+
+  --text: #e8e8e8;
+  --text-strong: #ffffff;
+  --muted: #909090;
+  --muted-light: #b0b0b0;
+
+  --locked: #4d4d4d;
+  --danger: #f0576b;
+  --warning: #e6b85c;
+
+  --glow-a: rgba(124, 111, 245, 0.16);
+  --glow-b: rgba(167, 139, 250, 0.10);
+
+  /*
+     Main content is dark in this theme, so its headline gradient
+     switches to a light text base. --gradient-text-sidebar is
+     intentionally not redeclared — the sidebar stays the same
+     dark navy either way, so its gradient never needs to change.
+  */
+  --gradient-text-main:
+    linear-gradient(
+      100deg,
+      #ffffff 0%,
+      #d6cffb 45%,
+      #a78bfa 100%
+    );
+
+  --success-bg: rgba(124, 111, 245, 0.16);
+  --danger-bg: rgba(240, 87, 107, 0.15);
+  --warning-bg: rgba(230, 184, 92, 0.15);
+  --accent-bg: rgba(124, 111, 245, 0.14);
+
+  /*
+     User's own messages are blue in both themes — visually
+     distinct from the neutral/purple assistant bubble, matching
+     the reference chat bubble color.
+  */
+  --bubble-assistant-bg: #262626;
+  --bubble-assistant-border: #3a3a3a;
+  --bubble-user-bg: #1e3a5f;
+  --bubble-user-border: #2f5c94;
+  --bubble-user-text: #cfe4ff;
+
+  --shadow-sm:
+    0 2px 8px rgba(0, 0, 0, 0.24);
+
+  --shadow:
+    0 8px 24px rgba(0, 0, 0, 0.32);
+
+  --shadow-lg:
+    0 16px 48px rgba(0, 0, 0, 0.42);
+
+  color-scheme: dark;
+}
+
+/*
+   A few surfaces use hardcoded rgba() glass values instead of
+   tokens. Those need explicit dark-mode counterparts.
+*/
+
+html[data-theme="dark"] .topbar {
+  background: rgba(26, 26, 26, 0.72);
+}
+
+html[data-theme="dark"] .chat-form {
+  background: rgba(33, 33, 33, 0.78);
+}
+
+html[data-theme="dark"] .chat-form:focus-within {
+  border-color: rgba(124, 111, 245, 0.5);
+}
+
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+}
+
+html[data-theme="dark"] .message-content code {
+  color: #e8c799;
+}
+
+html[data-theme="dark"] .message-content tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+
+/* ================================================================
+   THEME TOGGLE SWITCH
+   ================================================================ */
+
+.theme-toggle {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 60px;
+  height: 30px;
+
+  padding: 0 7px;
+
+  flex-shrink: 0;
+
+  background: var(--panel-2);
+
+  border: 1px solid var(--border-light);
+
+  border-radius: var(--radius-pill);
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.theme-toggle-icon {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 14px;
+  height: 14px;
+
+  color: var(--muted);
+}
+
+.theme-toggle-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+
+  top: 3px;
+  left: 3px;
+
+  width: 24px;
+  height: 24px;
+
+  background: var(--text-strong);
+
+  border-radius: 50%;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.theme-toggle-thumb::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 5px;
+
+  background-color: var(--bg);
+
+  -webkit-mask:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>")
+    no-repeat center / contain;
+
+  mask:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>")
+    no-repeat center / contain;
+
+  transition: mask-image 0.15s ease;
+}
+
+/*
+   Light mode: thumb slides to the right and its cutout icon
+   switches from moon to sun.
+*/
+html[data-theme="light"] .theme-toggle-thumb {
+  transform: translateX(30px);
+
+  background: #1b1b1f;
+}
+
+html[data-theme="light"] .theme-toggle-thumb::before {
+  background-color: #ffffff;
+
+  -webkit-mask-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='4'/><line x1='12' y1='1' x2='12' y2='3'/><line x1='12' y1='21' x2='12' y2='23'/><line x1='4.22' y1='4.22' x2='5.64' y2='5.64'/><line x1='18.36' y1='18.36' x2='19.78' y2='19.78'/><line x1='1' y1='12' x2='3' y2='12'/><line x1='21' y1='12' x2='23' y2='12'/><line x1='4.22' y1='19.78' x2='5.64' y2='18.36'/><line x1='18.36' y1='5.64' x2='19.78' y2='4.22'/></svg>")
+    no-repeat center / contain;
+
+  mask-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='4'/><line x1='12' y1='1' x2='12' y2='3'/><line x1='12' y1='21' x2='12' y2='23'/><line x1='4.22' y1='4.22' x2='5.64' y2='5.64'/><line x1='18.36' y1='18.36' x2='19.78' y2='19.78'/><line x1='1' y1='12' x2='3' y2='12'/><line x1='21' y1='12' x2='23' y2='12'/><line x1='4.22' y1='19.78' x2='5.64' y2='18.36'/><line x1='18.36' y1='5.64' x2='19.78' y2='4.22'/></svg>")
+    no-repeat center / contain;
+}
+
+
+/* ================================================================
+   RESET / BASE
+   ================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 450;
+  line-height: 1.6;
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--accent);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+::selection {
+  background: rgba(124, 111, 245, 0.35);
+  color: var(--text-strong);
+}
+
+
+/* ================================================================
+   MAIN APP LAYOUT
+   ================================================================ */
+
+.app {
+  position: relative;
+
+  display: flex;
+
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.app::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -20% -10% auto -10%;
+
+  height: 60%;
+
+  background:
+    radial-gradient(
+      45% 60% at 20% 0%,
+      var(--glow-a),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 55% at 85% 10%,
+      var(--glow-b),
+      transparent 70%
+    );
+
+  filter: blur(40px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.app > * {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+
+  flex: 0 0 var(--sidebar-width);
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 0;
+
+  color: var(--sidebar-text);
+
+  background: var(--sidebar-bg);
+
+  border-right: 1px solid var(--sidebar-border);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  scrollbar-gutter: stable;
+}
+
+.brand {
+  padding: 20px 20px 8px;
+}
+
+.brand h1 {
+  margin: 0;
+
+  background: var(--gradient-text-sidebar);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  overflow-wrap: anywhere;
+}
+
+.tagline {
+  margin: 4px 0 0;
+
+  color: var(--sidebar-muted);
+
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+
+/* ================================================================
+   PROGRESS
+   ================================================================ */
+
+.progress-box {
+  padding: 14px 20px 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.progress-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  margin-bottom: 7px;
+
+  color: var(--sidebar-muted);
+
+  font-size: 13px;
+}
+
+.progress-label span {
+  color: var(--accent-2);
+
+  font-size: 15px;
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+
+  background: var(--sidebar-panel-2);
+
+  border-radius: var(--radius-pill);
+
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  border-radius: var(--radius-pill);
+
+  transition: width 0.3s ease;
+}
+
+.progress-sub {
+  margin-top: 6px;
+
+  color: var(--sidebar-muted);
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+
+/* ================================================================
+   TRACK / MODULE LIST
+   ================================================================ */
+
+.track-list {
+  flex: 1;
+
+  min-height: 0;
+
+  padding: 8px 0 20px;
+}
+
+.track {
+  margin: 0 0 6px;
+}
+
+.track-header {
+  padding: 18px 20px 8px;
+
+  color: var(--sidebar-muted);
+
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.module-item {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  width: calc(100% - 16px);
+
+  margin: 1px 8px;
+
+  padding: 9px 12px;
+
+  color: var(--sidebar-text);
+
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  border-radius: var(--radius-md);
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.module-item:hover {
+  background: var(--sidebar-panel-2);
+
+  color: var(--sidebar-text-strong);
+}
+
+.module-item.active {
+  background: var(--sidebar-panel-2);
+
+  color: var(--sidebar-text-strong);
+}
+
+.module-item.locked {
+  color: var(--sidebar-muted);
+  cursor: not-allowed;
+}
+
+.module-item.locked:hover {
+  background: transparent;
+}
+
+.module-item .status-icon {
+  width: 20px;
+
+  flex: 0 0 20px;
+
+  font-size: 16px;
+
+  text-align: center;
+}
+
+.module-item .m-title {
+  flex: 1;
+
+  min-width: 0;
+
+  color: inherit;
+
+  font-weight: 500;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.module-item .m-score {
+  flex-shrink: 0;
+
+  color: var(--sidebar-muted);
+
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+
+/* ================================================================
+   MAIN CONTENT AREA
+   ================================================================ */
+
+.main {
+  position: relative;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+
+/* ================================================================
+   SPLIT LAYOUT — LESSON PANE + VIDEO PANE
+   ================================================================ */
+
+/*
+   .main starts as a column (topbar/chat-window/chat-form stacked).
+
+   script.js's setupSplitLayout() wraps that entire stack into a
+   new .lesson-pane div, then appends a sibling .video-pane div,
+   and adds this .main-split class to .main to switch it to a row.
+
+   Each pane scrolls independently — the lesson/chat column never
+   gets blocked by video content, and vice versa.
+*/
+
+.main-split {
+  flex-direction: row !important;
+}
+
+.lesson-pane {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1 1 58%;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.video-pane {
+  flex: 1 1 42%;
+
+  min-width: 320px;
+  max-width: 640px;
+  min-height: 0;
+
+  padding: 22px;
+
+  background: var(--bg-soft);
+
+  border-left: 1px solid var(--border);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  scrollbar-gutter: stable;
+}
+
+.video-pane.hidden {
+  display: none !important;
+}
+
+/*
+   Inside the video pane, #youtube-section no longer needs to
+   center itself or cap its width against --content-max-width —
+   it now IS the pane's content.
+*/
+
+.video-pane #youtube-section,
+.video-pane .youtube-section {
+  max-width: 100%;
+
+  margin: 0;
+}
+
+
+/* ================================================================
+   TOP BAR
+   ================================================================ */
+
+.topbar {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex: 0 0 auto;
+
+  min-width: 0;
+  min-height: var(--topbar-height);
+
+  gap: 16px;
+
+  padding: 16px 24px;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+
+  border-bottom: 1px solid var(--border);
+}
+
+#current-module-title {
+  min-width: 0;
+
+  margin: 0;
+
+  color: var(--text-strong);
+
+  font-size: 16.5px;
+  font-weight: 650;
+  line-height: 1.4;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+
+/* ================================================================
+   CHAT / LESSON WINDOW
+   ================================================================ */
+
+/*
+   IMPORTANT
+   ----------
+   .chat-window is the primary scrolling container.
+
+   Lesson content, messages, recommendation prompts and YouTube
+   sections must remain in normal document flow.
+
+   Do NOT use position: fixed, position: absolute, inset: 0,
+   height: 100vh or transform-based overlays inside these sections.
+*/
+
+.chat-window {
+  position: relative;
+
+  isolation: isolate;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  gap: 16px;
+
+  padding: 24px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior-y: contain;
+
+  scroll-behavior: smooth;
+
+  scrollbar-gutter: stable;
+}
+
+.chat-window > * {
+  flex-shrink: 0;
+}
+
+
+/* ================================================================
+   EMPTY STATE
+   ================================================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 620px;
+
+  margin: 80px auto;
+
+  text-align: center;
+}
+
+.empty-state h1,
+.empty-state .empty-state-title {
+  margin: 0 0 12px;
+
+  background: var(--gradient-text-main);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: -0.01em;
+}
+
+.empty-state p,
+.empty-state .empty-state-subtitle {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+   MESSAGES
+   ================================================================ */
+
+.msg {
+  position: relative;
+
+  width: 100%;
+  max-width: var(--message-max-width);
+
+  line-height: 1.75;
+
+  overflow: visible;
+
+  flex-shrink: 0;
+
+  overflow-wrap: anywhere;
+}
+
+/*
+   Two distinctly colored message bubbles, matching the reference:
+   the agent's (Curra's) replies sit in a neutral off-white card,
+   and the student's own messages sit in a tinted purple/lavender
+   card. This replaces the earlier "flush, no bubble" treatment —
+   the color difference itself is the whole point here.
+*/
+.msg.assistant {
+  align-self: flex-start;
+
+  max-width: 92%;
+
+  padding: 14px 18px;
+
+  background: var(--bubble-assistant-bg);
+
+  color: var(--text);
+
+  border: 1px solid var(--bubble-assistant-border);
+
+  border-radius: var(--radius-xl);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.msg.user {
+  align-self: flex-end;
+
+  max-width: 70%;
+
+  padding: 12px 18px;
+
+  background: var(--bubble-user-bg);
+
+  color: var(--bubble-user-text);
+
+  border: 1px solid var(--bubble-user-border);
+
+  border-radius: var(--radius-xl);
+}
+
+.msg.user a {
+  color: var(--bubble-user-text);
+  text-decoration: underline;
+}
+
+.msg.system {
+  align-self: center;
+
+  width: auto;
+  max-width: 90%;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  font-style: italic;
+
+  text-align: center;
+
+  padding: 8px 12px;
+}
+
+
+/* ================================================================
+   MESSAGE CONTENT
+   ================================================================ */
+
+.message-content {
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  color: var(--text);
+
+  font-size: 15.5px;
+  font-weight: 450;
+  line-height: 1.75;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.message-content > :first-child {
+  margin-top: 0;
+}
+
+.message-content > :last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+   MESSAGE HEADINGS
+   ================================================================ */
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4,
+.message-content h5,
+.message-content h6 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  color: var(--text-strong);
+
+  line-height: 1.3;
+
+  overflow-wrap: anywhere;
+}
+
+.message-content h1 {
+  font-size: 22px;
+}
+
+.message-content h2 {
+  font-size: 19px;
+}
+
+.message-content h3 {
+  font-size: 17px;
+}
+
+.message-content h4 {
+  font-size: 15px;
+}
+
+.message-content h5,
+.message-content h6 {
+  font-size: 14px;
+}
+
+
+/* ================================================================
+   PARAGRAPHS
+   ================================================================ */
+
+.message-content p {
+  margin: 0 0 14px;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+   LISTS
+   ================================================================ */
+
+.message-content ul,
+.message-content ol {
+  margin: 10px 0 16px;
+
+  padding-left: 26px;
+}
+
+.message-content li {
+  margin-bottom: 7px;
+
+  padding-left: 3px;
+}
+
+.message-content li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+   TEXT FORMATTING
+   ================================================================ */
+
+.message-content strong {
+  color: var(--text-strong);
+
+  font-weight: 700;
+}
+
+.message-content em {
+  font-style: italic;
+}
+
+.message-content del {
+  opacity: 0.75;
+}
+
+
+/* ================================================================
+   BLOCKQUOTES
+   ================================================================ */
+
+.message-content blockquote {
+  margin: 16px 0;
+
+  padding: 10px 16px;
+
+  background: var(--panel);
+
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+
+  color: var(--muted-light);
+}
+
+.message-content blockquote > :first-child {
+  margin-top: 0;
+}
+
+.message-content blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+   TABLES
+   ================================================================ */
+
+.message-content table {
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  margin: 16px 0;
+
+  border-collapse: collapse;
+
+  overflow-x: auto;
+}
+
+.message-content th,
+.message-content td {
+  padding: 9px 12px;
+
+  border: 1px solid var(--border);
+
+  text-align: left;
+
+  vertical-align: top;
+}
+
+.message-content th {
+  background: var(--panel);
+
+  color: var(--text-strong);
+
+  font-weight: 700;
+}
+
+.message-content tr:nth-child(even) td {
+  background: rgba(20, 18, 31, 0.02);
+}
+
+
+/* ================================================================
+   INLINE CODE
+   ================================================================ */
+
+.message-content code {
+  display: inline;
+
+  padding: 2px 6px;
+
+  background: var(--panel-3);
+
+  border: 1px solid var(--border-light);
+
+  border-radius: 5px;
+
+  color: #96580f;
+
+  font-family: var(--font-mono);
+
+  font-size: 0.9em;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ================================================================
+   CODE BLOCKS
+   ================================================================ */
+
+.message-content pre {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 16px 0;
+
+  padding: 14px 16px;
+
+  background: #0b0d11;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-md);
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  line-height: 1.5;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.message-content pre code {
+  display: block;
+
+  padding: 0;
+
+  background: transparent;
+
+  border: 0;
+
+  border-radius: 0;
+
+  /*
+     Fixed light text — this block's background (#0b0d11) is
+     intentionally dark in both themes, so its text color can't be
+     "inherit" the way the rest of the page's text does.
+  */
+  color: #e8e8f0;
+
+  font-family: var(--font-mono);
+
+  font-size: 13px;
+
+  white-space: pre;
+
+  overflow-wrap: normal;
+}
+
+
+/* ================================================================
+   CODE LANGUAGE LABEL
+   ================================================================ */
+
+.code-language {
+  margin-bottom: 8px;
+
+  /*
+     Fixed color, same reasoning as .message-content pre code above
+     — this label renders inside the always-dark <pre> block.
+  */
+  color: #8b899e;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+/* ================================================================
+   LINKS
+   ================================================================ */
+
+.message-content a {
+  color: var(--accent);
+
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+}
+
+.message-content a:hover {
+  color: var(--accent-2);
+
+  text-decoration: underline;
+}
+
+
+/* ================================================================
+   IMAGES INSIDE MESSAGES
+   ================================================================ */
+
+.message-content img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+
+  margin: 14px 0;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-md);
+}
+
+
+/* ================================================================
+   LESSON CONTENT
+   ================================================================ */
+
+.lesson-content {
+  position: relative;
+
+  width: 100%;
+  max-width: var(--content-max-width);
+
+  margin: 0 auto;
+
+  flex-shrink: 0;
+
+  overflow: visible;
+}
+
+.lesson-content > *,
+.lesson-section,
+.lesson-card {
+  position: relative;
+
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+
+  inset: auto;
+
+  z-index: auto;
+
+  max-width: 100%;
+
+  transform: none;
+}
+
+
+/*
+   Explicitly prevent lesson content from becoming an overlay.
+*/
+
+.lesson-content,
+.lesson-content > *,
+.lesson-section,
+.lesson-card {
+  height: auto;
+  min-height: 0;
+
+  overflow: visible;
+}
+
+
+/* ================================================================
+   LESSON COMPLETE
+   ================================================================ */
+
+.lesson-complete {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+  max-width: var(--content-max-width);
+
+  margin: 0 auto;
+
+  padding: 18px 20px;
+
+  background: var(--panel-2);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  flex-shrink: 0;
+}
+
+.lesson-complete h3,
+.lesson-complete h4 {
+  margin-top: 0;
+}
+
+
+/* ================================================================
+   YOUTUBE RECOMMENDATION PROMPT
+   ================================================================ */
+
+/*
+   This is the question shown before fetching recommended videos.
+
+   It intentionally stays in normal document flow, inside the
+   lesson pane's chat-window.
+*/
+
+.youtube-recommendation-prompt {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  z-index: 1 !important;
+
+  width: 100%;
+  max-width: var(--message-max-width);
+
+  align-self: flex-start;
+
+  margin: 0;
+
+  padding: 18px 20px;
+
+  background: var(--panel-2);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: none;
+
+  overflow: visible;
+
+  flex-shrink: 0;
+
+  transform: none !important;
+}
+
+.youtube-recommendation-prompt .message-content {
+  width: 100%;
+}
+
+.youtube-recommendation-prompt strong {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--text-strong);
+
+  font-size: 15px;
+}
+
+.youtube-recommendation-prompt p {
+  margin: 0 0 14px;
+
+  color: var(--muted);
+
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+   YOUTUBE RECOMMENDATION ACTIONS
+   ================================================================ */
+
+.youtube-recommendation-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 14px;
+}
+
+.youtube-recommendation-actions button {
+  min-height: 38px;
+
+  padding: 9px 14px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.youtube-recommendation-actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.youtube-recommendation-actions button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.youtube-recommendation-actions button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.youtube-recommend-yes {
+  background: var(--text-strong);
+
+  color: var(--bg);
+
+  border-color: var(--text-strong) !important;
+
+  border-radius: var(--radius-pill);
+}
+
+.youtube-recommend-yes:hover:not(:disabled) {
+  background: #d9d9d9;
+}
+
+.youtube-recommend-no {
+  background: transparent;
+
+  color: var(--text);
+
+  border-radius: var(--radius-pill);
+}
+
+.youtube-recommend-no:hover:not(:disabled) {
+  background: var(--panel-3);
+
+  border-color: var(--border-light);
+}
+
+
+/* ================================================================
+   YOUTUBE LOADING STATUS
+   ================================================================ */
+
+.youtube-loading-status {
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  font-style: italic;
+
+  line-height: 1.5;
+}
+
+
+/* ================================================================
+   YOUTUBE SECTION
+   ================================================================ */
+
+/*
+   JavaScript creates:
+
+     #youtube-section
+     #youtube-list
+
+   These now live inside .video-pane (see the SPLIT LAYOUT block
+   above), so they no longer need to constrain themselves to
+   --content-max-width or center themselves with margin auto —
+   the pane itself provides the boundary and scroll container.
+
+   Still protected against becoming an overlay:
+     position: fixed
+     position: absolute
+     inset: 0
+     height: 100vh
+     transform overlays
+*/
+
+#youtube-section,
+.youtube-section {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  z-index: 1 !important;
+
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+
+  margin: 0;
+
+  padding: 22px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: none;
+
+  overflow: visible !important;
+
+  flex-shrink: 0;
+
+  transform: none !important;
+}
+
+#youtube-section.hidden,
+.youtube-section.hidden {
+  display: none !important;
+}
+
+
+/* ================================================================
+   YOUTUBE SECTION HEADINGS
+   ================================================================ */
+
+#youtube-section h1,
+#youtube-section h2,
+#youtube-section h3,
+#youtube-section h4,
+.youtube-section h1,
+.youtube-section h2,
+.youtube-section h3,
+.youtube-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  color: var(--text-strong);
+
+  line-height: 1.3;
+}
+
+#youtube-section h2,
+.youtube-section h2 {
+  font-size: 19px;
+}
+
+
+/* ================================================================
+   YOUTUBE SECTION DESCRIPTION / STATUS
+   ================================================================ */
+
+#youtube-section > p,
+.youtube-section > p {
+  margin-top: 0;
+  margin-bottom: 18px;
+
+  color: var(--muted);
+
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+   YOUTUBE LIST
+   ================================================================ */
+
+#youtube-list,
+.youtube-list {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  gap: 18px;
+
+  overflow: visible !important;
+
+  transform: none !important;
+}
+
+
+/* ================================================================
+   YOUTUBE CARD
+   ================================================================ */
+
+.youtube-card {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  z-index: auto !important;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+
+  padding: 0 0 18px;
+
+  background: transparent;
+
+  border: 0;
+  border-bottom: 1px solid var(--border);
+
+  border-radius: 0;
+
+  color: var(--text);
+
+  text-decoration: none;
+
+  overflow: visible !important;
+
+  box-shadow: none;
+
+  cursor: pointer;
+
+  transform: none !important;
+}
+
+.youtube-card:last-child {
+  padding-bottom: 0;
+
+  border-bottom: none;
+}
+
+.youtube-card:hover {
+  color: var(--text);
+
+  text-decoration: none;
+}
+
+
+/* ================================================================
+   YOUTUBE THUMBNAIL
+   ================================================================ */
+
+.youtube-thumbnail {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  margin: 0;
+
+  background: #0b0d11;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-md);
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.youtube-card:hover .youtube-thumbnail {
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+}
+
+
+/* ================================================================
+   YOUTUBE CARD INFO
+   ================================================================ */
+
+.youtube-card-info {
+  width: 100%;
+  min-width: 0;
+
+  padding-top: 10px;
+}
+
+.youtube-card-info h3 {
+  margin: 0;
+
+  color: var(--text-strong);
+
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+.youtube-card-info p {
+  margin: 5px 0 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ================================================================
+   GENERIC RECOMMENDED VIDEOS
+   ================================================================ */
+
+.recommended-videos,
+.video-recommendations,
+.recommended-videos-section {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  z-index: 1 !important;
+
+  display: block;
+
+  width: 100%;
+  max-width: var(--content-max-width);
+
+  height: auto !important;
+  min-height: 0;
+  max-height: none !important;
+
+  margin: 0 auto;
+
+  padding: 22px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: none;
+
+  flex-shrink: 0;
+
+  overflow: visible !important;
+
+  transform: none !important;
+}
+
+
+/* ================================================================
+   GENERIC RECOMMENDATION HEADINGS
+   ================================================================ */
+
+.recommended-videos h1,
+.recommended-videos h2,
+.recommended-videos h3,
+.recommended-videos h4,
+.video-recommendations h1,
+.video-recommendations h2,
+.video-recommendations h3,
+.video-recommendations h4,
+.recommended-videos-section h1,
+.recommended-videos-section h2,
+.recommended-videos-section h3,
+.recommended-videos-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  color: var(--text-strong);
+
+  line-height: 1.3;
+}
+
+
+/* ================================================================
+   GENERIC RECOMMENDATION DESCRIPTIONS
+   ================================================================ */
+
+.recommended-videos > p,
+.video-recommendations > p,
+.recommended-videos-section > p {
+  margin-top: 0;
+  margin-bottom: 18px;
+
+  color: var(--muted);
+
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+   VIDEO CARDS — LEGACY SUPPORT
+   ================================================================ */
+
+.video-card {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  z-index: auto !important;
+
+  width: 100%;
+
+  margin: 0 0 24px;
+
+  padding: 0 0 20px;
+
+  border-bottom: 1px solid var(--border);
+
+  overflow: visible !important;
+
+  transform: none !important;
+}
+
+.video-card:last-child {
+  margin-bottom: 0;
+
+  padding-bottom: 0;
+
+  border-bottom: none;
+}
+
+
+/* ================================================================
+   VIDEO IFRAMES
+   ================================================================ */
+
+.recommended-videos iframe,
+.video-recommendations iframe,
+.recommended-videos-section iframe,
+.video-card iframe {
+  position: relative !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  inset: auto !important;
+
+  z-index: auto !important;
+
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  border: 0;
+
+  border-radius: var(--radius-md);
+
+  background: #000;
+
+  transform: none !important;
+}
+
+
+/* ================================================================
+   GENERIC VIDEO IMAGES
+   ================================================================ */
+
+.video-card img,
+.recommended-videos img,
+.video-recommendations img,
+.recommended-videos-section img {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+
+  border-radius: var(--radius-md);
+
+  object-fit: cover;
+}
+
+
+/* ================================================================
+   VIDEO TITLE / LINK
+   ================================================================ */
+
+.video-card a {
+  display: block;
+
+  margin-top: 10px;
+
+  color: var(--accent);
+
+  font-weight: 600;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+.video-card a:hover {
+  color: var(--accent-2);
+}
+
+
+/* ================================================================
+   VIDEO META
+   ================================================================ */
+
+.video-card .video-description,
+.video-card .description {
+  margin-top: 8px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40px;
+
+  padding: 10px 18px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.92;
+
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--text-strong);
+
+  color: var(--bg);
+
+  border-color: var(--text-strong);
+
+  border-radius: var(--radius-pill);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #d9d9d9;
+
+  border-color: #d9d9d9;
+}
+
+.btn-secondary {
+  background: transparent;
+
+  color: var(--text);
+
+  border-color: var(--border-light);
+
+  border-radius: var(--radius-pill);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--muted-light);
+
+  background: var(--panel-2);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 36px;
+  min-height: 36px;
+
+  padding: 6px;
+
+  background: transparent;
+
+  border: 0;
+
+  border-radius: var(--radius-pill);
+
+  color: var(--muted);
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-icon:hover {
+  background: var(--panel-2);
+
+  color: var(--text);
+}
+
+
+/* ================================================================
+   VOICE TOGGLE
+   ================================================================ */
+
+.btn-icon-toggle {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  min-height: 36px;
+
+  padding: 8px 14px;
+
+  background: var(--panel-2);
+
+  border: 0;
+
+  border-radius: var(--radius-pill);
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-icon-toggle:hover {
+  background: var(--panel-3);
+}
+
+.btn-icon-toggle.off {
+  color: var(--muted);
+}
+
+.btn-icon-toggle.off .icon {
+  filter: grayscale(1);
+}
+
+
+/* ================================================================
+   CHAT FORM
+   ================================================================ */
+
+.chat-form {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+
+  flex: 0 0 auto;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  min-height: 60px;
+
+  margin: 0 24px 20px;
+
+  padding: 10px 12px 10px 22px;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+  border: 1px solid var(--border-light);
+
+  border-radius: var(--radius-pill);
+
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chat-form:focus-within {
+  border-color: rgba(124, 111, 245, 0.5);
+
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 4px var(--accent-bg);
+}
+
+.chat-form input,
+.chat-form textarea {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 8px 0;
+
+  background: transparent;
+
+  border: 0;
+
+  color: var(--text-strong);
+
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.chat-form input::placeholder,
+.chat-form textarea::placeholder {
+  color: var(--muted-light);
+
+  font-weight: 450;
+}
+
+.chat-form input:focus,
+.chat-form textarea:focus {
+  outline: none;
+}
+
+.chat-form input:disabled,
+.chat-form textarea:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+.chat-form button[type="submit"] {
+  position: relative;
+
+  min-width: 40px;
+  min-height: 40px;
+
+  padding: 0;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /*
+     Whatever text/icon lives inside this button in index.html is
+     hidden here (same technique as .btn-mic above) so a consistent
+     vector arrow icon renders instead, regardless of markup.
+  */
+  font-size: 0;
+
+  background: transparent;
+
+  color: var(--text-strong);
+
+  border: 0;
+
+  border-radius: var(--radius-pill);
+
+  cursor: pointer;
+
+  box-shadow: none;
+
+  transition:
+    background 0.15s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+.chat-form button[type="submit"]::before {
+  content: "";
+
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  background-color: currentColor;
+
+  -webkit-mask:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='19' x2='12' y2='5'/><polyline points='5 12 12 5 19 12'/></svg>")
+    no-repeat center / contain;
+
+  mask:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='19' x2='12' y2='5'/><polyline points='5 12 12 5 19 12'/></svg>")
+    no-repeat center / contain;
+}
+
+.chat-form button[type="submit"]:hover:not(:disabled) {
+  background: var(--panel-3);
+}
+
+/*
+   Once the student has typed something, script.js adds .has-text
+   to .chat-form — the button switches from a plain ghost icon
+   (matching the mic button) to a solid colored send button.
+*/
+.chat-form.has-text button[type="submit"] {
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent-2),
+      var(--accent)
+    );
+
+  color: #ffffff;
+
+  box-shadow: 0 2px 10px rgba(124, 111, 245, 0.35);
+}
+
+.chat-form.has-text button[type="submit"]:hover:not(:disabled) {
+  filter: brightness(1.08);
+
+  box-shadow: 0 3px 14px rgba(124, 111, 245, 0.5);
+}
+
+.chat-form button[type="submit"]:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.chat-form button[type="submit"]:disabled {
+  background: var(--panel-3);
+
+  color: var(--muted);
+
+  box-shadow: none;
+
+  cursor: not-allowed;
+}
+
+
+/* ================================================================
+   MICROPHONE
+   ================================================================ */
+
+.btn-mic {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 40px;
+  min-height: 40px;
+
+  padding: 0;
+
+  flex-shrink: 0;
+
+  background: transparent;
+
+  border: 0;
+
+  border-radius: var(--radius-pill);
+
+  color: var(--text-strong);
+
+  /*
+     The emoji character (🎙️) rendered by script.js/index.html is
+     hidden here — font-size: 0 collapses its box without needing
+     to touch the JS/HTML. A clean vector icon is drawn instead via
+     the ::before mask below, so it always matches the theme color
+     (including automatically going white on the red "recording"
+     state) instead of being a fixed-color platform emoji glyph.
+  */
+  font-size: 0;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-mic::before {
+  content: "";
+
+  display: block;
+
+  width: 19px;
+  height: 19px;
+
+  background-color: currentColor;
+
+  -webkit-mask:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z'/><path d='M19 10v2a7 7 0 0 1-14 0v-2'/><line x1='12' y1='19' x2='12' y2='23'/><line x1='8' y1='23' x2='16' y2='23'/></svg>")
+    no-repeat center / contain;
+
+  mask:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z'/><path d='M19 10v2a7 7 0 0 1-14 0v-2'/><line x1='12' y1='19' x2='12' y2='23'/><line x1='8' y1='23' x2='16' y2='23'/></svg>")
+    no-repeat center / contain;
+}
+
+.btn-mic:hover:not(:disabled) {
+  background: var(--panel-3);
+}
+
+.btn-mic.recording {
+  background: var(--danger);
+
+  color: #ffffff;
+
+  border-color: var(--danger);
+
+  animation: pulse 1.2s infinite;
+}
+
+.btn-mic:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+
+/* ================================================================
+   MICROPHONE ANIMATION
+   ================================================================ */
+
+@keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 0 0
+      rgba(229, 99, 122, 0.5);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 10px
+      rgba(229, 99, 122, 0);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0
+      rgba(229, 99, 122, 0);
+  }
+}
+
+
+/* ================================================================
+   MICROPHONE STATUS
+   ================================================================ */
+
+.mic-status {
+  padding: 6px;
+
+  color: var(--danger);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+/* ================================================================
+   VOICE SUPPORT BANNER
+   ================================================================ */
+
+.voice-support-banner {
+  margin: 10px 24px 0;
+
+  padding: 10px 14px;
+
+  background: rgba(229, 99, 122, 0.12);
+
+  border: 1px solid rgba(229, 99, 122, 0.2);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--danger);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* ================================================================
+   READ ALOUD
+   ================================================================ */
+
+.msg-speak-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 8px;
+
+  padding: 4px 10px;
+
+  background: transparent;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-pill);
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.msg-speak-btn:hover {
+  background: var(--panel);
+
+  border-color: var(--accent);
+
+  color: var(--text);
+}
+
+.msg-speak-btn.speaking {
+  color: var(--accent);
+
+  border-color: var(--accent);
+
+  background: var(--accent-bg);
+}
+
+
+/* ================================================================
+   MODAL
+   ================================================================ */
+
+.modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  overflow-y: auto;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  width: 640px;
+  max-width: 92vw;
+  max-height: 86vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-lg);
+
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  flex-shrink: 0;
+
+  padding: 18px 22px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h1,
+.modal-header h2,
+.modal-header h3,
+.modal-header h4 {
+  margin: 0;
+
+  color: var(--text-strong);
+
+  line-height: 1.3;
+}
+
+.modal-body {
+  min-height: 0;
+
+  padding: 20px 22px;
+
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  padding: 16px 22px;
+
+  border-top: 1px solid var(--border);
+}
+
+
+/* ================================================================
+   QUIZ
+   ================================================================ */
+
+.quiz-q {
+  margin-bottom: 22px;
+}
+
+.quiz-q:last-child {
+  margin-bottom: 0;
+}
+
+.quiz-q p.prompt {
+  margin: 0 0 10px;
+
+  color: var(--text-strong);
+
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+.quiz-opt {
+  display: block;
+
+  width: 100%;
+
+  margin-bottom: 6px;
+
+  padding: 10px 14px;
+
+  background: transparent;
+
+  border: 1px solid var(--border-light);
+
+  border-radius: var(--radius-md);
+
+  color: var(--text);
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.quiz-opt:hover {
+  background: var(--panel-2);
+
+  border-color: var(--accent);
+}
+
+.quiz-opt input {
+  margin-right: 8px;
+}
+
+.quiz-q textarea {
+  width: 100%;
+
+  min-height: 70px;
+
+  padding: 10px;
+
+  background: var(--panel-2);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  resize: vertical;
+}
+
+.quiz-q textarea:focus {
+  outline: none;
+
+  border-color: var(--accent);
+
+  box-shadow: 0 0 0 2px rgba(124, 111, 245, 0.12);
+}
+
+.quiz-result {
+  margin-top: 6px;
+
+  padding: 8px 10px;
+
+  border-radius: var(--radius-sm);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.quiz-result.correct {
+  background: var(--success-bg);
+
+  color: var(--accent-2);
+}
+
+.quiz-result.incorrect {
+  background: var(--danger-bg);
+
+  color: var(--danger);
+}
+
+
+/* ================================================================
+   SCORE BANNER
+   ================================================================ */
+
+.score-banner {
+  margin-bottom: 16px;
+
+  padding: 14px 18px;
+
+  border-radius: var(--radius-md);
+
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+.score-banner.pass {
+  background: var(--success-bg);
+
+  color: var(--accent-2);
+}
+
+.score-banner.fail {
+  background: var(--danger-bg);
+
+  color: var(--danger);
+}
+
+
+/* ================================================================
+   ERROR / STATUS
+   ================================================================ */
+
+.progress-error,
+.quiz-error {
+  color: var(--danger);
+
+  line-height: 1.5;
+}
+
+.loading,
+.loading-status {
+  color: var(--muted);
+
+  font-size: 13px;
+
+  font-style: italic;
+}
+
+
+/* ================================================================
+   GENERAL UTILITY
+   ================================================================ */
+
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  padding: 0 !important;
+  margin: -1px !important;
+
+  overflow: hidden !important;
+
+  clip: rect(0, 0, 0, 0) !important;
+
+  white-space: nowrap !important;
+
+  border: 0 !important;
+}
+
+
+/* ================================================================
+   SCROLLBARS
+   ================================================================ */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-light);
+}
+
+
+/* ================================================================
+   RESPONSIVE — TABLET
+   ================================================================ */
+
+@media (max-width: 1100px) {
+  :root {
+    --sidebar-width: 280px;
+  }
+
+  .chat-window {
+    padding: 20px;
+  }
+
+  .chat-form {
+    padding: 14px 20px;
+  }
+
+  .topbar {
+    padding: 14px 20px;
+  }
+
+  .video-pane {
+    min-width: 280px;
+  }
+}
+
+
+/* ================================================================
+   RESPONSIVE — SMALL TABLET
+   ================================================================ */
+
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 270px;
+  }
+
+  .chat-window {
+    padding: 18px;
+
+    gap: 14px;
+  }
+
+  .chat-form {
+    padding: 14px 18px;
+  }
+
+  .topbar {
+    padding: 14px 18px;
+  }
+
+  #youtube-section,
+  .youtube-section,
+  .recommended-videos,
+  .video-recommendations,
+  .recommended-videos-section,
+  .lesson-content,
+  .lesson-complete {
+    max-width: 100%;
+  }
+
+  .youtube-recommendation-prompt {
+    max-width: 100%;
+  }
+
+  /*
+     Below this width the split becomes a top/bottom stack
+     instead of a left/right split — see the block below.
+  */
+  .main-split {
+    flex-direction: column !important;
+  }
+
+  .lesson-pane {
+    flex: 1 1 auto;
+
+    min-height: 0;
+  }
+
+  .video-pane {
+    flex: 0 0 auto;
+
+    width: 100%;
+    max-width: 100%;
+    max-height: 46vh;
+
+    min-width: 0;
+
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+}
+
+
+/* ================================================================
+   RESPONSIVE — MOBILE
+   ================================================================ */
+
+@media (max-width: 700px) {
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .app {
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+  }
+
+  .sidebar {
+    width: 240px;
+
+    flex-basis: 240px;
+  }
+
+  .brand {
+    padding: 16px 16px 8px;
+  }
+
+  .progress-box {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .track-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .module-item {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .topbar {
+    min-height: 60px;
+
+    padding: 12px 14px;
+
+    gap: 10px;
+  }
+
+  #current-module-title {
+    font-size: 14px;
+  }
+
+  .topbar-actions {
+    gap: 6px;
+  }
+
+  .chat-window {
+    padding: 14px;
+
+    gap: 12px;
+  }
+
+  .msg {
+    max-width: 100%;
+
+    padding: 14px 16px;
+  }
+
+  .chat-form {
+    gap: 7px;
+
+    padding: 12px 14px;
+  }
+
+  .chat-form input,
+  .chat-form textarea {
+    padding: 11px 12px;
+
+    font-size: 14px;
+  }
+
+  .btn {
+    min-height: 38px;
+
+    padding: 9px 12px;
+  }
+
+  .btn-mic {
+    min-width: 42px;
+    min-height: 42px;
+
+    padding: 9px 11px;
+  }
+
+  .btn-icon-toggle {
+    min-height: 34px;
+
+    padding: 7px 9px;
+
+    font-size: 12px;
+  }
+
+  #youtube-section,
+  .youtube-section,
+  .recommended-videos,
+  .video-recommendations,
+  .recommended-videos-section {
+    padding: 16px;
+
+    border-radius: 12px;
+  }
+
+  .youtube-recommendation-prompt {
+    padding: 16px;
+  }
+
+  .youtube-recommendation-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .youtube-recommendation-actions button {
+    width: 100%;
+  }
+
+  .video-card {
+    margin-bottom: 18px;
+
+    padding-bottom: 16px;
+  }
+
+  .video-pane {
+    max-height: 50vh;
+
+    padding: 16px;
+  }
+
+  .modal {
+    align-items: flex-start;
+
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+
+    max-height: calc(100vh - 20px);
+
+    margin: auto 0;
+  }
+
+  .modal-header {
+    padding: 16px;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-footer {
+    padding: 14px 16px;
+  }
+}
+
+
+/* ================================================================
+   RESPONSIVE — SMALL MOBILE
+   ================================================================ */
+
+@media (max-width: 520px) {
+  :root {
+    --sidebar-width: 210px;
+  }
+
+  .sidebar {
+    width: 210px;
+
+    flex-basis: 210px;
+  }
+
+  .brand {
+    padding: 16px 14px 8px;
+  }
+
+  .progress-box {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .track-header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .module-item {
+    padding-left: 14px;
+    padding-right: 14px;
+
+    gap: 8px;
+
+    font-size: 13px;
+  }
+
+  .module-item .m-score {
+    display: none;
+  }
+
+  .chat-window {
+    padding: 10px;
+
+    gap: 10px;
+  }
+
+  .msg {
+    padding: 13px 14px;
+
+    border-radius: 12px;
+
+    line-height: 1.6;
+  }
+
+  .chat-form {
+    gap: 6px;
+
+    padding: 10px;
+  }
+
+  .chat-form input {
+    min-width: 0;
+
+    font-size: 13px;
+  }
+
+  .btn {
+    padding: 9px 11px;
+  }
+
+  .btn-mic {
+    min-width: 40px;
+
+    padding: 9px 10px;
+  }
+
+  .topbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .topbar-actions {
+    gap: 4px;
+  }
+
+  #youtube-section,
+  .youtube-section {
+    padding: 14px;
+
+    border-radius: 12px;
+  }
+
+  .youtube-card-info h3 {
+    font-size: 14px;
+  }
+
+  .message-content h1 {
+    font-size: 20px;
+  }
+
+  .message-content h2 {
+    font-size: 18px;
+  }
+
+  .message-content h3 {
+    font-size: 16px;
+  }
+
+  .message-content pre {
+    padding: 12px;
+
+    border-radius: 8px;
+  }
+
+  .message-content pre code {
+    font-size: 12px;
+  }
+
+  .video-pane {
+    max-height: 55vh;
+
+    padding: 14px;
+  }
+}
+
+
+/* ================================================================
+   VERY SMALL SCREENS
+   ================================================================ */
+
+@media (max-width: 400px) {
+  :root {
+    --sidebar-width: 190px;
+  }
+
+  .sidebar {
+    width: 190px;
+
+    flex-basis: 190px;
+  }
+
+  .brand h1 {
+    font-size: 18px;
+  }
+
+  .tagline {
+    font-size: 12px;
+  }
+
+  .module-item {
+    padding-left: 11px;
+    padding-right: 11px;
+
+    font-size: 12px;
+  }
+
+  .track-header {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .progress-box {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .topbar-actions .btn-icon-toggle {
+    font-size: 0;
+  }
+
+  .topbar-actions .btn-icon-toggle .icon {
+    font-size: 16px;
+  }
+
+  .chat-window {
+    padding: 8px;
+  }
+
+  .chat-form {
+    padding: 8px;
+  }
+}
+
+
+/* ================================================================
+   ACCESSIBILITY — REDUCED MOTION
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

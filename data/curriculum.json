@@ -1,0 +1,74 @@
+{
+  "learner_profile": {
+    "curriculum_name": "Data Science, Machine Learning & Career Readiness Program",
+    "last_updated": "2026-08-12",
+    "total_modules": 43,
+    "modules_completed": 23,
+    "completion_percentage": 53,
+    "total_skills_mastered": 227,
+    "total_skills_remaining": 99
+  },
+  "tracks": [
+    {
+      "track_name": "Data Science & Programming Foundations",
+      "status": "completed",
+      "modules": [
+        {"id": 1, "title": "Introduction to Data Science", "status": "completed", "skills_mastered": 9, "topics": ["Data Science Exploration", "Data Science Roles", "Real World Applications", "Data Science Workflow", "Data Science Project Process", "Conclusion", "Introduction to Data Science Checkpoint", "Introduction to Data Science One to One", "Introduction to Data Science"]},
+        {"id": 2, "title": "Mathematics For Data Science", "status": "completed", "skills_mastered": 14, "topics": ["Introduction to Statistics", "Data Types", "Measures of Central Tendency", "Measures of Dispersion and Variability", "Linear Algebra Basics", "Basic Probability", "Probability Distributions", "Inferential Statistics", "Hypothesis Testing", "Real-World Applications of Statistics", "Conclusion", "Data Analysis and Matrix Operations", "Introduction to Mathematics interview questions", "Introduction to Mathematics Workshops"]},
+        {"id": 3, "title": "Integration And Version Control With Git", "status": "completed", "skills_mastered": 10, "topics": ["Getting Started With Git", "Basic Git Commands", "Configuring Git", "GitHub Introduction", "Working with Remotes", "GitHub Workflow", "Conclusion", "Git & GitHub Project", "Git & GitHub One To One", "Git & GitHub Workshop"]},
+        {"id": 4, "title": "Relational Database Management", "status": "completed", "skills_mastered": 7, "topics": ["What's Database", "What's DataBase Management Systems", "Database Design", "Conclusion", "Relational Database Management Checkpoint", "Relational Database Management One to One", "Relational Database Management Workshop"]},
+        {"id": 5, "title": "Conceptual Model", "status": "completed", "skills_mastered": 7, "topics": ["Entity/Relationship Model", "Relationships", "Other Types of Relationships", "Conclusion", "Conceptual Model Checkpoint", "Conceptual Model", "Conceptual model workshop"]},
+        {"id": 6, "title": "Relational Model", "status": "completed", "skills_mastered": 8, "topics": ["Relational Model Overview", "Mapping Rules", "Mapping Rule: Specific Cases", "Normalization", "Conclusion", "Relational Model Checkpoint", "Relational model one to one", "Relational Model Workshop"]},
+        {"id": 7, "title": "Data Definition Language", "status": "completed", "skills_mastered": 8, "topics": ["SQL Definition", "Environment setup for SQL", "Create Data Structure", "Constraints", "Conclusion", "Data definition language Checkpoint", "Data definition language", "Data Definition Language workshop"]},
+        {"id": 8, "title": "Data Manipulation Language (DML)", "status": "completed", "skills_mastered": 7, "topics": ["Add Data", "Update Data", "Delete Data", "Conclusion", "Data Manipulation Language Checkpoint", "Data Manipulation Language (DML)", "Data Manipulation Language workshop"]},
+        {"id": 9, "title": "Data Query Language (DQL)", "status": "completed", "skills_mastered": 12, "topics": ["Data Query Language", "Where clause", "Order By clause", "Group Functions", "Types of Joins", "Subqueries", "Set Operators", "Conclusion", "Data Query Language Checkpoint", "SQL Project", "Data Query Language", "Learn SQL Workshop"]},
+        {"id": 10, "title": "Introduction To Python", "status": "completed", "skills_mastered": 8, "topics": ["What's Python", "Python vs. Other Languages: Syntax Comparison", "Python Characteristics", "Python Applications", "Google colab", "Conclusion", "Introduction to Python one to one", "Introduction to Python Workshop"]},
+        {"id": 11, "title": "Python Basics", "status": "completed", "skills_mastered": 19, "topics": ["Python Syntax", "Variables and Constants", "Assigning / Reassigning value to a variable", "Python arithmetic operators", "Python comparison operators", "Python data types", "Python String", "Python string operations", "Python Boolean", "Type conversion", "Python If condition", "If/else condition", "If/else/elif condition", "Python For loop", "Python While loop", "Conclusion", "Python basics Checkpoint", "Python basics", "Let's learn python basics"]},
+        {"id": 12, "title": "Data Structures In Python", "status": "completed", "skills_mastered": 11, "topics": ["Python Data Structures Overview", "List", "List Manipulation", "python dictionary", "Dictionary Manipulation", "Python Sets", "Python Tuple", "Conclusion", "Python data structures", "Python data structures", "Python data structures"]},
+        {"id": 13, "title": "Python Functions", "status": "completed", "skills_mastered": 12, "topics": ["What's a function", "Create a Function", "Python Function Arguments", "Functions with Multiple Parameters", "Default Arguments", "The return statement", "Lambda function", "Map function", "Conclusion", "Functions Checkpoint", "Python functions", "Python Functions Workshop"]},
+        {"id": 14, "title": "Object Oriented Programming (OOP)", "status": "completed", "skills_mastered": 7, "topics": ["Fundamentals of OOP", "Build Your First Class", "Principles of Object-Oriented Programming", "Conclusion", "Creating a Bank Account", "OOP One to one", "Object Oriented Programming Workshop"]},
+        {"id": 15, "title": "Numerical And Data Analysis With NumPy", "status": "completed", "skills_mastered": 12, "topics": ["What's Numpy?", "Numpy arrays creation", "Array reshaping", "Array indexing", "Array slicing", "Numpy random", "Some numpy functions", "Numpy addition/Subtration", "Conclusion", "Let's build create arrays", "One to One: Python numpy", "Workshop: Python numpy"]},
+        {"id": 16, "title": "Gathering Data With API", "status": "completed", "skills_mastered": 10, "topics": ["Introduction to APIs", "Understanding REST", "How APIs Work", "Components of REST APIs", "Implementing API with Python Requests", "Practical Example of Gathering Data Using an API", "Conclusion", "Data Gathering with API checkpoint", "Gathering Data with API", "Gathering Data with API Workshop"]},
+        {"id": 17, "title": "Python Web Scraping", "status": "completed", "skills_mastered": 11, "topics": ["Explorer le Web Scraping", "Challenge & Legality of Web Scraping", "Understanding HTML for Web Scraping", "Getting Started with Web Scraping", "Scrape HTML Content from a Page", "Utilizing Classes and IDs for Efficient Web Scraping", "Practical example", "Conclusion", "Web Scraping", "Web Scraping One To One", "Web Scraping Workshop"]},
+        {"id": 18, "title": "File Handling", "status": "completed", "skills_mastered": 10, "topics": ["Introduction to Files", "Understanding Files, Objects, Reading, and Parsing", "Understanding Data Types", "Distinguishing Text Files from Flat Files", "I/O Operations with NumPy", "Conclusion", "Python Project", "File Handling Checkpoint", "File Handling One to One", "File Handling Workshop"]},
+        {"id": 19, "title": "Data Cleaning And Transformation With Pandas", "status": "completed", "skills_mastered": 7, "topics": ["Introduction to Pandas Series", "Introduction to Pandas DataFrames", "Dataframe Selection", "Conclusion", "Dataframe Filtering and Selection using iloc and loc", "Data cleaning and transformation with pandas", "Data Manipulation with Pandas Workshop"]},
+        {"id": 20, "title": "Data Exploration With Pandas", "status": "completed", "skills_mastered": 11, "topics": ["Introduction to Data exploration", "Initial Data Analysis with Pandas", "Handling Missing Data", "Outliers", "Data Anomalies", "Data Encoding", "Exploratory data analysis (EDA) with Pandas", "Conclusion", "Data pre-processing checkpoint", "Data exploration with Pandas", "Data exploration with pandas workshop"]},
+        {"id": 21, "title": "Pandas Profiling", "status": "completed", "skills_mastered": 8, "topics": ["Why Pandas profiling?", "Pandas Profiling in Action", "Pandas Profiling Overview", "Conclusion", "ydata-profiling checkpoint 1", "ydata-profiling checkpoint 2", "data cleaning and transformation with pandas One to One", "Pandas profiling Workshop"]},
+        {"id": 22, "title": "Data Visualization With Python", "status": "completed", "skills_mastered": 10, "topics": ["Introduction to Data Visualization", "Exploring Popular Chart Types", "How to Choose the Right Chart for Your Data", "Introduction to Plotly", "Introduction to Matplotlib and Seaborn", "How to Choose Between Plotly, Matplotlib, and Seaborn", "Conclusion", "Data Visualization with Python", "Data Visualization with Python", "Data visualization with python Workshop"]},
+        {"id": 23, "title": "Data Visualization With Tableau Software", "status": "in_progress", "skills_mastered": 10, "progress_percentage": 100, "note": "All skills completed; checkpoint still pending", "topics": ["Tableau Software", "Install Tableau", "Your First Visualization", "Mastering Calculated Fields and Bins in Tableau", "Unleashing Your Creativity with Tableau Visualizations", "Conclusion", "Data Visualization With Tableau Software Checkpoint", "Tableau Project", "Data Visualization With Tableau Software One to One", "Data Visualization With Tableau Software Workshop"]}
+      ]
+    },
+    {
+      "track_name": "Machine Learning & Deep Learning",
+      "status": "not_started",
+      "modules": [
+        {"id": 24, "title": "Implement Simple ML Algorithms In Python", "status": "locked", "skills_total": 5, "topics": ["Linear Regression", "Decision Trees", "K-NN", "Conclusion", "Checkpoint 5: Train and evaluate model (Iris dataset)"]},
+        {"id": 25, "title": "Train/Test Split And Cross-Validation", "status": "locked", "skills_total": 4, "topics": ["Train/Test Split", "Cross-Validation", "Conclusion", "Checkpoint 6: Evaluate model using validation"]},
+        {"id": 26, "title": "Evaluation Metrics", "status": "locked", "skills_total": 5, "topics": ["Classification Metrics", "Regression Metrics", "Clustering Metrics", "Conclusion", "Checkpoint 7: Focused on Model Metrics"]},
+        {"id": 27, "title": "Data Cleaning And Feature Scaling", "status": "locked", "skills_total": 4, "topics": ["Data Cleaning", "Feature Scaling", "Conclusion", "Checkpoint 8: Focus on Preprocessing"]},
+        {"id": 28, "title": "Fundamentals Of AI, ML, DL", "status": "locked", "skills_total": 3, "topics": ["Overviews of AI, ML, DL", "Conclusion", "Checkpoint 9: Simple Neural Network and Explanation"]},
+        {"id": 29, "title": "Forward And Backward Propagation", "status": "locked", "skills_total": 3, "topics": ["Concepts of forward/backward pass", "Conclusion", "Checkpoint 10: Train a Neural Network with Explanation"]},
+        {"id": 30, "title": "Training Mechanics", "status": "locked", "skills_total": 6, "topics": ["Loss Functions", "Optimization Algorithms", "Activation Functions", "Parameters and Hyperparameters", "Conclusion", "Checkpoint 11: Explanation of the Training Process — Focus on Optimization and Hyperparameters"]},
+        {"id": 31, "title": "GPU Use For DL", "status": "locked", "skills_total": 4, "topics": ["GPU Architecture", "GPU Acceleration", "Conclusion", "Checkpoint 12: Use GPU in Neural Network Training"]},
+        {"id": 32, "title": "Design And Train CNNs", "status": "locked", "skills_total": 4, "topics": ["CNN Architecture", "Training CNNs", "Conclusion", "Checkpoint 13: Train CNN on ASL"]},
+        {"id": 33, "title": "Data Augmentation And Dropout", "status": "locked", "skills_total": 4, "topics": ["Data Augmentation", "Dropout", "Conclusion", "Checkpoint 14: Regularization Techniques – Data Augmentation & Dropout"]},
+        {"id": 34, "title": "Batch Normalization", "status": "locked", "skills_total": 3, "topics": ["Mechanics and Benefits", "Conclusion", "Checkpoint 15: Train a CNN with Batch Normalization"]},
+        {"id": 35, "title": "Performance Evaluation", "status": "locked", "skills_total": 3, "topics": ["Validation Curves, Over/Underfitting", "Conclusion", "Checkpoint 16: Modify a Model to Correct Overfitting"]},
+        {"id": 36, "title": "Transfer Learning", "status": "locked", "skills_total": 4, "topics": ["Transfer Learning", "Pre-trained Models for Image Classification", "Conclusion", "Checkpoint 17: Modify a Pre-trained Model"]},
+        {"id": 37, "title": "Feature Extraction Vs. Fine-Tuning", "status": "locked", "skills_total": 3, "topics": ["Concepts and Comparison", "Conclusion", "Checkpoint 18: Personalize an Image Classifier"]},
+        {"id": 38, "title": "Model Serving With Streamlit", "status": "locked", "skills_total": 3, "topics": ["Web/App Deployment", "Conclusion", "Checkpoint 19: Deploy a Personalized Image Classifier"]},
+        {"id": 39, "title": "Encoder-Decoder And BERT", "status": "locked", "skills_total": 5, "topics": ["NLP", "Encoder-Decoder", "BERT Architecture", "Conclusion", "Checkpoint 20: Fine-Tune BERT for Sentiment Analysis"]},
+        {"id": 40, "title": "Advanced Architectures", "status": "locked", "skills_total": 4, "topics": ["Autoencoders", "Variational Autoencoder", "Diffusion Models", "Conclusion"]}
+      ]
+    },
+    {
+      "track_name": "Career Readiness",
+      "status": "not_started",
+      "modules": [
+        {"id": 41, "title": "LinkedIn Guide", "status": "locked", "skills_total": 13, "topics": ["Introduction to Job Hunters Guide", "Understanding LinkedIn", "What can I do with my profile on LinkedIn", "An Effective LinkedIn", "LinkedIn algorithm", "Picture, Headlines, and Summary", "Featured, Experience, Skills, and Recommendations", "Golden rules for content on LinkedIn", "Your Social Selling Index", "LinkedIn Profile Example", "Conclusion", "Creating an impactful LinkedIn profile", "LinkedIn Guide"]},
+        {"id": 42, "title": "A Stunning Resume", "status": "locked", "skills_total": 10, "topics": ["Introduction to resume", "Common resume mistakes", "Creating a bot and recruiter-friendly resume", "Formatting and structure", "CV Sections", "Resume Templates", "Conclusion", "Create your own cv", "Identify Mistakes and Fix a CV", "A Stunning Resume"]},
+        {"id": 43, "title": "How To Interview Like A Pro", "status": "locked", "skills_total": 9, "topics": ["Introduction to the Job interview", "The interview process", "Types of interview questions", "What are recruiters really looking for", "Negotiations", "Feedback and reflection", "Conclusion", "The 1 to 1 Job Interview", "How to Interview Like a Pro"]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: curriculum-tutor
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: GROK_API_KEY
+        sync: false
+      - key: GROK_BASE_URL
+        value: https://api.x.ai/v1
+      - key: GROK_MODEL
+        value: grok-4-fast
+      - key: PASS_THRESHOLD
+        value: "0.7"
+      - key: FLASK_DEBUG
+        value: "0"
+    disk:
+      name: tutor-db
+      mountPath: /opt/render/project/src/instance
+      sizeGB: 1
