@@ -7,13 +7,6 @@
    ---------------------------------------------------------------- */
 
 :root {
-  /*
-     Light, airy main content area with a soft off-white/lavender
-     tint, paired with a permanently dark navy sidebar (its own
-     fixed tokens below, not part of the light/dark toggle) and a
-     single purple signature accent — matching the reference CRM
-     inbox: light workspace, dark nav rail, purple highlights.
-  */
   --bg: #f7f7fb;
   --bg-soft: #ffffff;
 
@@ -29,11 +22,6 @@
   --muted: #8b8a99;
   --muted-light: #6c6b7a;
 
-  /*
-     The permanently dark sidebar — always this color regardless of
-     the light/dark toggle, same as the reference's nav rail. Fully
-     neutral black/gray, no purple undertone.
-  */
   --sidebar-bg: #171717;
   --sidebar-panel: #1e1e1e;
   --sidebar-panel-2: #272727;
@@ -42,8 +30,6 @@
   --sidebar-text-strong: #ffffff;
   --sidebar-muted: #8c8c8c;
 
-  /* The one signature color — a confident purple, used for the
-     logo, active states, the send button, and the progress bar. */
   --accent: #7c6ff5;
   --accent-hover: #6a5cf0;
   --accent-2: #a78bfa;
@@ -52,16 +38,9 @@
   --danger: #e04a63;
   --warning: #c98a1f;
 
-  /* Second hue paired with --accent for gradient headline text and
-     the ambient background glow. */
   --glow-a: rgba(124, 111, 245, 0.16);
   --glow-b: rgba(167, 139, 250, 0.12);
 
-  /* Two gradient text variants: one fixed for the always-dark
-     sidebar wordmark, one theme-dependent for the main content
-     empty-state headline. Main starts dark-text-based since the
-     light theme is the default (dark theme override below swaps
-     this to a light-text base). */
   --gradient-text-sidebar:
     linear-gradient(
       100deg,
@@ -82,11 +61,6 @@
   --warning-bg: rgba(201, 138, 31, 0.12);
   --accent-bg: rgba(124, 111, 245, 0.1);
 
-  /*
-     User/assistant message bubble colors. Agent replies sit in a
-     neutral off-white card; the student's own messages sit in a
-     blue-tinted card — matching the reference chat bubble color.
-  */
   --bubble-assistant-bg: #ffffff;
   --bubble-assistant-border: #ecebf3;
   --bubble-user-bg: #dbeafe;
@@ -102,7 +76,6 @@
   --shadow-lg:
     0 16px 48px rgba(20, 18, 31, 0.14);
 
-  /* Rounder throughout — pill inputs, generously rounded cards. */
   --radius-sm: 10px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -140,23 +113,7 @@
    DARK THEME OVERRIDE
    ================================================================ */
 
-/*
-   The light, purple-accented palette above is now the default,
-   matching the reference. This block is the dark-mode alternate —
-   script.js's applyTheme() sets data-theme="dark" on <html> to
-   activate it. The --sidebar-* tokens are intentionally NOT
-   redeclared here: the nav rail stays the same dark navy in both
-   themes, exactly like the reference always shows a dark sidebar
-   regardless of the main workspace being light.
-*/
-
 html[data-theme="dark"] {
-  /*
-     Neutral, near-black surfaces — matching Claude's dark theme
-     rather than tinting every panel purple. The signature accent
-     (buttons, focus rings, progress bar) stays purple; it's just
-     the backgrounds that go fully neutral now.
-  */
   --bg: #1a1a1a;
   --bg-soft: #131313;
 
@@ -179,12 +136,6 @@ html[data-theme="dark"] {
   --glow-a: rgba(124, 111, 245, 0.16);
   --glow-b: rgba(167, 139, 250, 0.10);
 
-  /*
-     Main content is dark in this theme, so its headline gradient
-     switches to a light text base. --gradient-text-sidebar is
-     intentionally not redeclared — the sidebar stays the same
-     dark navy either way, so its gradient never needs to change.
-  */
   --gradient-text-main:
     linear-gradient(
       100deg,
@@ -198,11 +149,6 @@ html[data-theme="dark"] {
   --warning-bg: rgba(230, 184, 92, 0.15);
   --accent-bg: rgba(124, 111, 245, 0.14);
 
-  /*
-     User's own messages are blue in both themes — visually
-     distinct from the neutral/purple assistant bubble, matching
-     the reference chat bubble color.
-  */
   --bubble-assistant-bg: #262626;
   --bubble-assistant-border: #3a3a3a;
   --bubble-user-bg: #1e3a5f;
@@ -220,11 +166,6 @@ html[data-theme="dark"] {
 
   color-scheme: dark;
 }
-
-/*
-   A few surfaces use hardcoded rgba() glass values instead of
-   tokens. Those need explicit dark-mode counterparts.
-*/
 
 html[data-theme="dark"] .topbar {
   background: rgba(26, 26, 26, 0.72);
@@ -340,10 +281,6 @@ html[data-theme="dark"] .message-content tr:nth-child(even) td {
   transition: mask-image 0.15s ease;
 }
 
-/*
-   Light mode: thumb slides to the right and its cutout icon
-   switches from moon to sun.
-*/
 html[data-theme="light"] .theme-toggle-thumb {
   transform: translateX(30px);
 
@@ -774,17 +711,6 @@ hr {
    SPLIT LAYOUT — LESSON PANE + VIDEO PANE
    ================================================================ */
 
-/*
-   .main starts as a column (topbar/chat-window/chat-form stacked).
-
-   script.js's setupSplitLayout() wraps that entire stack into a
-   new .lesson-pane div, then appends a sibling .video-pane div,
-   and adds this .main-split class to .main to switch it to a row.
-
-   Each pane scrolls independently — the lesson/chat column never
-   gets blocked by video content, and vice versa.
-*/
-
 .main-split {
   flex-direction: row !important;
 }
@@ -827,12 +753,6 @@ hr {
 .video-pane.hidden {
   display: none !important;
 }
-
-/*
-   Inside the video pane, #youtube-section no longer needs to
-   center itself or cap its width against --content-max-width —
-   it now IS the pane's content.
-*/
 
 .video-pane #youtube-section,
 .video-pane .youtube-section {
@@ -903,18 +823,6 @@ hr {
 /* ================================================================
    CHAT / LESSON WINDOW
    ================================================================ */
-
-/*
-   IMPORTANT
-   ----------
-   .chat-window is the primary scrolling container.
-
-   Lesson content, messages, recommendation prompts and YouTube
-   sections must remain in normal document flow.
-
-   Do NOT use position: fixed, position: absolute, inset: 0,
-   height: 100vh or transform-based overlays inside these sections.
-*/
 
 .chat-window {
   position: relative;
@@ -1015,13 +923,6 @@ hr {
   overflow-wrap: anywhere;
 }
 
-/*
-   Two distinctly colored message bubbles, matching the reference:
-   the agent's (Curra's) replies sit in a neutral off-white card,
-   and the student's own messages sit in a tinted purple/lavender
-   card. This replaces the earlier "flush, no bubble" treatment —
-   the color difference itself is the whole point here.
-*/
 .msg.assistant {
   align-self: flex-start;
 
@@ -1334,11 +1235,6 @@ hr {
 
   border-radius: 0;
 
-  /*
-     Fixed light text — this block's background (#0b0d11) is
-     intentionally dark in both themes, so its text color can't be
-     "inherit" the way the rest of the page's text does.
-  */
   color: #e8e8f0;
 
   font-family: var(--font-mono);
@@ -1358,10 +1254,6 @@ hr {
 .code-language {
   margin-bottom: 8px;
 
-  /*
-     Fixed color, same reasoning as .message-content pre code above
-     — this label renders inside the always-dark <pre> block.
-  */
   color: #8b899e;
 
   font-size: 11px;
@@ -1444,11 +1336,6 @@ hr {
   transform: none;
 }
 
-
-/*
-   Explicitly prevent lesson content from becoming an overlay.
-*/
-
 .lesson-content,
 .lesson-content > *,
 .lesson-section,
@@ -1494,13 +1381,6 @@ hr {
 /* ================================================================
    YOUTUBE RECOMMENDATION PROMPT
    ================================================================ */
-
-/*
-   This is the question shown before fetching recommended videos.
-
-   It intentionally stays in normal document flow, inside the
-   lesson pane's chat-window.
-*/
 
 .youtube-recommendation-prompt {
   position: relative !important;
@@ -1662,25 +1542,6 @@ hr {
 /* ================================================================
    YOUTUBE SECTION
    ================================================================ */
-
-/*
-   JavaScript creates:
-
-     #youtube-section
-     #youtube-list
-
-   These now live inside .video-pane (see the SPLIT LAYOUT block
-   above), so they no longer need to constrain themselves to
-   --content-max-width or center themselves with margin auto —
-   the pane itself provides the boundary and scroll container.
-
-   Still protected against becoming an overlay:
-     position: fixed
-     position: absolute
-     inset: 0
-     height: 100vh
-     transform overlays
-*/
 
 #youtube-section,
 .youtube-section {
@@ -2412,11 +2273,6 @@ hr {
   align-items: center;
   justify-content: center;
 
-  /*
-     Whatever text/icon lives inside this button in index.html is
-     hidden here (same technique as .btn-mic above) so a consistent
-     vector arrow icon renders instead, regardless of markup.
-  */
   font-size: 0;
 
   background: transparent;
@@ -2461,11 +2317,6 @@ hr {
   background: var(--panel-3);
 }
 
-/*
-   Once the student has typed something, script.js adds .has-text
-   to .chat-form — the button switches from a plain ghost icon
-   (matching the mic button) to a solid colored send button.
-*/
 .chat-form.has-text button[type="submit"] {
   background:
     linear-gradient(
@@ -2526,14 +2377,6 @@ hr {
 
   color: var(--text-strong);
 
-  /*
-     The emoji character (🎙️) rendered by script.js/index.html is
-     hidden here — font-size: 0 collapses its box without needing
-     to touch the JS/HTML. A clean vector icon is drawn instead via
-     the ::before mask below, so it always matches the theme color
-     (including automatically going white on the red "recording"
-     state) instead of being a fixed-color platform emoji glyph.
-  */
   font-size: 0;
 
   cursor: pointer;
@@ -3007,6 +2850,80 @@ hr {
 
 
 /* ================================================================
+   COLLAPSIBLE SIDEBAR (MOBILE)
+   ================================================================ */
+
+/*
+   Toggle button — hidden on desktop/tablet. Below the mobile
+   breakpoint the sidebar becomes a hidden off-canvas panel instead
+   of a permanently-shrunk column, and this button slides it in/out.
+*/
+
+.sidebar-toggle-btn {
+  display: none;
+
+  position: fixed;
+
+  top: 14px;
+  left: 14px;
+
+  z-index: 60;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  background: var(--panel-2);
+
+  border: 1px solid var(--border-light);
+
+  border-radius: var(--radius-pill);
+
+  color: var(--text);
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--panel-3);
+}
+
+.sidebar-backdrop {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 55;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-backdrop.open {
+  display: block;
+
+  opacity: 1;
+}
+
+
+/* ================================================================
    RESPONSIVE — TABLET
    ================================================================ */
 
@@ -3070,10 +2987,6 @@ hr {
     max-width: 100%;
   }
 
-  /*
-     Below this width the split becomes a top/bottom stack
-     instead of a left/right split — see the block below.
-  */
   .main-split {
     flex-direction: column !important;
   }
@@ -3103,6 +3016,14 @@ hr {
    RESPONSIVE — MOBILE
    ================================================================ */
 
+/*
+   Below 700px the sidebar switches from "always visible, shrinking
+   column" to "hidden off-canvas panel, opened by the hamburger
+   button and closed by tapping the backdrop or selecting a
+   module." The .main column takes the full viewport width so the
+   lesson/chat content is no longer squeezed by a fixed sidebar.
+*/
+
 @media (max-width: 700px) {
   html,
   body {
@@ -3119,10 +3040,39 @@ hr {
     min-height: 0;
   }
 
-  .sidebar {
-    width: 240px;
+  .sidebar-toggle-btn {
+    display: inline-flex;
+  }
 
-    flex-basis: 240px;
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 56;
+
+    width: 82vw;
+    max-width: 300px;
+
+    height: 100vh;
+    height: 100dvh;
+
+    flex-basis: auto;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.25s ease;
+
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main {
+    width: 100%;
   }
 
   .brand {
@@ -3147,7 +3097,7 @@ hr {
   .topbar {
     min-height: 60px;
 
-    padding: 12px 14px;
+    padding: 12px 14px 12px 62px;
 
     gap: 10px;
   }
@@ -3275,17 +3225,15 @@ hr {
    RESPONSIVE — SMALL MOBILE
    ================================================================ */
 
+/*
+   The sidebar stays off-canvas (from the 700px block above) — no
+   width/flex-basis overrides needed here anymore since it's not
+   permanently occupying layout space. Its own internal width
+   (82vw, max 300px) already adapts down naturally on narrow
+   screens without extra rules.
+*/
+
 @media (max-width: 520px) {
-  :root {
-    --sidebar-width: 210px;
-  }
-
-  .sidebar {
-    width: 210px;
-
-    flex-basis: 210px;
-  }
-
   .brand {
     padding: 16px 14px 8px;
   }
@@ -3352,6 +3300,7 @@ hr {
   .topbar {
     padding-left: 10px;
     padding-right: 10px;
+    padding-left: 56px;
   }
 
   .topbar-actions {
@@ -3404,16 +3353,6 @@ hr {
    ================================================================ */
 
 @media (max-width: 400px) {
-  :root {
-    --sidebar-width: 190px;
-  }
-
-  .sidebar {
-    width: 190px;
-
-    flex-basis: 190px;
-  }
-
   .brand h1 {
     font-size: 18px;
   }
