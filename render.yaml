@@ -6,12 +6,12 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
-      - key: GROK_API_KEY
+      - key: GROQ_API_KEY
         sync: false
-      - key: GROK_BASE_URL
+      - key: GROQ_BASE_URL
         value: https://api.x.ai/v1
-      - key: GROK_MODEL
-        value: grok-4-fast
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
       - key: PASS_THRESHOLD
         value: "0.7"
       - key: FLASK_DEBUG
